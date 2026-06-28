@@ -1,7 +1,7 @@
 #import "FavoritesListViewController.h"
 #import "FavoritesListViewModel.h"
 #import "BreedCell.h"
-#import "BreedDetailViewController.h"
+#import "iOS_POC_MVVM-Swift.h"
 
 @interface FavoritesListViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) FavoritesListViewModel *viewModel;

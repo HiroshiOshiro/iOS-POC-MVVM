@@ -23,3 +23,5 @@ targets:
         CLANG_ENABLE_OBJC_ARC: YES
         TARGETED_DEVICE_FAMILY: "1"
         IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/iOS-POC-MVVM-Bridging-Header.h
+        SWIFT_VERSION: "5.0"

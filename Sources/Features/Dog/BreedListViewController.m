@@ -1,7 +1,7 @@
 #import "BreedListViewController.h"
 #import "BreedListViewModel.h"
 #import "BreedCell.h"
-#import "BreedDetailViewController.h"
+#import "iOS_POC_MVVM-Swift.h"
 
 @interface BreedListViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) BreedListViewModel *viewModel;

@@ -1,6 +1,6 @@
 import Foundation
 
-/// お気に入りの読み書きと変更通知を担当するリポジトリ（Domain）。
+/// お気に入りの読み書き＋変更通知を担当する Repository。
 protocol FavoritesRepository: Sendable {
     func isFavorite(_ breedName: String) -> Bool
     @discardableResult

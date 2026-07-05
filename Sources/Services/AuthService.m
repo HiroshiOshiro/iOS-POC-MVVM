@@ -1,6 +1,16 @@
 #import "AuthService.h"
+#import <os/log.h>
 
 static NSString *const kAuthErrorDomain = @"com.poc.AuthService";
+
+static os_log_t AuthLog(void) {
+    static os_log_t log;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        log = os_log_create("com.poc.iOS-POC-MVVM", "Auth");
+    });
+    return log;
+}
 
 @implementation AuthService
 
@@ -34,6 +44,9 @@ static NSString *const kAuthErrorDomain = @"com.poc.AuthService";
         [email stringByTrimmingCharactersInSet:
             [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
+    // リクエストログ（パスワードは伏せる）
+    os_log_info(AuthLog(), "➡️ REQUEST POST /api/login (mock) email=%{public}@", trimmedEmail);
+
     // 擬似的なネットワーク遅延
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
@@ -43,6 +56,8 @@ static NSString *const kAuthErrorDomain = @"com.poc.AuthService";
                                     code:401
                                 userInfo:@{NSLocalizedDescriptionKey:
                                                @"メールアドレスまたはパスワードが正しくありません"}];
+            os_log_error(AuthLog(), "⬅️ RESPONSE 401 /api/login (mock) — %{public}@",
+                         error.localizedDescription);
             completion(nil, error);
             return;
         }
@@ -53,6 +68,8 @@ static NSString *const kAuthErrorDomain = @"com.poc.AuthService";
                              displayName:@"山田 太郎"
                                    email:trimmedEmail
                                    token:@"mock-token-abcdef123456"];
+        os_log_info(AuthLog(), "⬅️ RESPONSE 200 /api/login (mock) userId=%{public}@",
+                    user.userId);
         completion(user, nil);
     });
 }

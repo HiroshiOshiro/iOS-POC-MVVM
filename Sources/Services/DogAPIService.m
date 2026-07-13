@@ -140,7 +140,7 @@ static os_log_t DogAPILog(void) {
     return [NSError errorWithDomain:kDogAPIErrorDomain
                                code:-1
                            userInfo:@{NSLocalizedDescriptionKey:
-                                          @"レスポンスの解析に失敗しました"}];
+                                          NSLocalizedString(@"error.decoding_failed", nil)}];
 }
 
 - (void)callOnMain:(id)completion withResult:(id)result error:(NSError *)error {

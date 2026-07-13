@@ -20,7 +20,7 @@ willConnectToSession:(UISceneSession *)session
     UINavigationController *dogNav =
         [[UINavigationController alloc] initWithRootViewController:dogVC];
     dogNav.tabBarItem = [[UITabBarItem alloc]
-        initWithTitle:@"Dog"
+        initWithTitle:NSLocalizedString(@"tab.dog", nil)
                 image:[UIImage systemImageNamed:@"pawprint"]
                   tag:0];
 
@@ -29,7 +29,7 @@ willConnectToSession:(UISceneSession *)session
     UINavigationController *favNav =
         [[UINavigationController alloc] initWithRootViewController:favVC];
     favNav.tabBarItem = [[UITabBarItem alloc]
-        initWithTitle:@"Favorites"
+        initWithTitle:NSLocalizedString(@"tab.favorites", nil)
                 image:[UIImage systemImageNamed:@"heart"]
                   tag:1];
 
@@ -38,7 +38,7 @@ willConnectToSession:(UISceneSession *)session
     UINavigationController *settingsNav =
         [[UINavigationController alloc] initWithRootViewController:settingsVC];
     settingsNav.tabBarItem = [[UITabBarItem alloc]
-        initWithTitle:@"Settings"
+        initWithTitle:NSLocalizedString(@"tab.settings", nil)
                 image:[UIImage systemImageNamed:@"gearshape"]
                   tag:2];
 

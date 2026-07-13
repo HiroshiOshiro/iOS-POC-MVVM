@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"settings.title", nil);
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     [self setupLoginForm];
     [self setupProfileView];
@@ -61,16 +61,18 @@
 
 - (void)setupLoginForm {
     UILabel *heading = [[UILabel alloc] init];
-    heading.text = @"ログイン";
+    heading.text = NSLocalizedString(@"settings.login", nil);
     heading.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle1];
 
-    self.emailField = [self makeFieldWithPlaceholder:@"メールアドレス"];
+    self.emailField =
+        [self makeFieldWithPlaceholder:NSLocalizedString(@"settings.email", nil)];
     self.emailField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.emailField.textContentType = UITextContentTypeUsername;
 
-    self.passwordField = [self makeFieldWithPlaceholder:@"パスワード"];
+    self.passwordField =
+        [self makeFieldWithPlaceholder:NSLocalizedString(@"settings.password", nil)];
     self.passwordField.secureTextEntry = YES;
     self.passwordField.textContentType = UITextContentTypePassword;
 
@@ -82,7 +84,7 @@
 
     self.loginButton = [UIButton buttonWithType:UIButtonTypeSystem];
     UIButtonConfiguration *config = [UIButtonConfiguration filledButtonConfiguration];
-    config.title = @"ログイン";
+    config.title = NSLocalizedString(@"settings.login", nil);
     self.loginButton.configuration = config;
     [self.loginButton addTarget:self
                          action:@selector(loginTapped)
@@ -94,7 +96,7 @@
     self.spinner.hidesWhenStopped = YES;
 
     UILabel *hint = [[UILabel alloc] init];
-    hint.text = @"※ モック認証です。パスワードは 4 文字以上で成功します。";
+    hint.text = NSLocalizedString(@"settings.mock_hint", nil);
     hint.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     hint.textColor = [UIColor secondaryLabelColor];
     hint.numberOfLines = 0;
@@ -139,7 +141,7 @@
 
     self.logoutButton = [UIButton buttonWithType:UIButtonTypeSystem];
     UIButtonConfiguration *config = [UIButtonConfiguration tintedButtonConfiguration];
-    config.title = @"ログアウト";
+    config.title = NSLocalizedString(@"settings.logout", nil);
     config.baseForegroundColor = [UIColor systemRedColor];
     self.logoutButton.configuration = config;
     [self.logoutButton addTarget:self
@@ -193,9 +195,12 @@
     User *user = self.viewModel.currentUser;
     if (user) {
         self.nameLabel.text = user.displayName;
-        self.idLabel.text = [NSString stringWithFormat:@"ID: %@", user.userId];
-        self.emailLabel.text = [NSString stringWithFormat:@"メール: %@", user.email];
-        self.tokenLabel.text = [NSString stringWithFormat:@"トークン: %@", user.token];
+        self.idLabel.text =
+            [NSString stringWithFormat:NSLocalizedString(@"settings.id_format", nil), user.userId];
+        self.emailLabel.text =
+            [NSString stringWithFormat:NSLocalizedString(@"settings.email_format", nil), user.email];
+        self.tokenLabel.text =
+            [NSString stringWithFormat:NSLocalizedString(@"settings.token_format", nil), user.token];
     }
 }
 

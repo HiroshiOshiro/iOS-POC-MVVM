@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"お気に入り";
+    self.title = NSLocalizedString(@"favorites.title", nil);
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     [self setupTableView];
     [self setupEmptyLabel];
@@ -56,7 +56,7 @@
 
 - (void)setupEmptyLabel {
     self.emptyLabel = [[UILabel alloc] init];
-    self.emptyLabel.text = @"お気に入りはまだありません。\nDog タブの ♡ で追加できます。";
+    self.emptyLabel.text = NSLocalizedString(@"favorites.empty", nil);
     self.emptyLabel.numberOfLines = 0;
     self.emptyLabel.textAlignment = NSTextAlignmentCenter;
     self.emptyLabel.textColor = [UIColor secondaryLabelColor];
@@ -139,7 +139,7 @@ trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof(self) weakSelf = self;
     UIContextualAction *delete =
         [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive
-                                                title:@"削除"
+                                                title:NSLocalizedString(@"favorites.delete", nil)
                                               handler:^(UIContextualAction *action,
                                                         UIView *sourceView,
                                                         void (^completionHandler)(BOOL)) {

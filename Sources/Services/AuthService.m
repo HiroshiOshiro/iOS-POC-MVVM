@@ -55,7 +55,7 @@ static os_log_t AuthLog(void) {
                 [NSError errorWithDomain:kAuthErrorDomain
                                     code:401
                                 userInfo:@{NSLocalizedDescriptionKey:
-                                               @"メールアドレスまたはパスワードが正しくありません"}];
+                                               NSLocalizedString(@"auth.invalid_credentials", nil)}];
             os_log_error(AuthLog(), "⬅️ RESPONSE 401 /api/login (mock) — %{public}@",
                          error.localizedDescription);
             completion(nil, error);

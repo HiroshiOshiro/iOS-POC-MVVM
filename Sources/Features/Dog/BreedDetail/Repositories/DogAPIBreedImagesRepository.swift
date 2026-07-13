@@ -84,13 +84,13 @@ enum DogAPIError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidResponse:
-            return "サーバーからの応答が不正です"
+            return String(localized: "error.invalid_response")
         case .httpStatus(let code):
-            return "通信に失敗しました（HTTP \(code)）"
+            return String(format: String(localized: "error.http_status_format"), code)
         case .decoding:
-            return "レスポンスの解析に失敗しました"
+            return String(localized: "error.decoding_failed")
         case .apiFailure(let status):
-            return "API がエラーを返しました（status: \(status)）"
+            return String(format: String(localized: "error.api_failure_format"), status)
         }
     }
 }

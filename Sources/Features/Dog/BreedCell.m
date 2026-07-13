@@ -66,7 +66,7 @@ NSString *const BreedCellReuseIdentifier = @"BreedCell";
 - (void)configureWithBreed:(Breed *)breed isFavorite:(BOOL)isFavorite {
     self.titleLabel.text = breed.displayName;
     NSString *subText = breed.subBreedsDescription;
-    self.subtitleLabel.text = subText ? subText : @"サブ犬種なし";
+    self.subtitleLabel.text = subText ? subText : NSLocalizedString(@"breed.no_sub_breeds", nil);
     [self updateFavoriteAppearance:isFavorite];
 }
 
@@ -75,7 +75,7 @@ NSString *const BreedCellReuseIdentifier = @"BreedCell";
     [self.favoriteButton setImage:[UIImage systemImageNamed:symbol]
                          forState:UIControlStateNormal];
     self.favoriteButton.tintColor =
-        isFavorite ? [UIColor systemRedColor] : [UIColor systemGrayColor];
+        isFavorite ? [UIColor colorNamed:@"FavoriteRed"] : [UIColor systemGrayColor];
 }
 
 - (void)favoriteButtonTapped {

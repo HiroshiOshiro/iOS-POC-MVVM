@@ -78,7 +78,7 @@ final class BreedDetailViewController: UIViewController {
     private func refreshFavoriteButton() {
         let isFav = container.services.breedDetail.isFavorite(item)
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFav ? "heart.fill" : "heart")
-        navigationItem.rightBarButtonItem?.tintColor = isFav ? .systemRed : nil
+        navigationItem.rightBarButtonItem?.tintColor = isFav ? UIColor(resource: .favoriteRed) : nil
     }
 
     @objc private func favoriteTapped() {

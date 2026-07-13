@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"犬種一覧";
+    self.title = NSLocalizedString(@"breed_list.title", nil);
     self.view.backgroundColor = [UIColor systemBackgroundColor];
     [self setupTableView];
     [self setupSpinner];
@@ -91,10 +91,10 @@
 
 - (void)showError:(NSString *)message {
     UIAlertController *alert =
-        [UIAlertController alertControllerWithTitle:@"エラー"
+        [UIAlertController alertControllerWithTitle:NSLocalizedString(@"common.error", nil)
                                             message:message
                                      preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"common.ok", nil)
                                               style:UIAlertActionStyleDefault
                                             handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];

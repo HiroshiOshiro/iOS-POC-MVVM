@@ -25,10 +25,10 @@ struct BreedDetailView: View {
             Text(viewModel.breed.displayName)
                 .font(.title)
             if let subs = viewModel.breed.subBreedsDescription {
-                Text("サブ犬種: \(subs)")
+                Text(String(format: String(localized: "breed_detail.sub_breeds_format"), subs))
                     .foregroundColor(.secondary)
             } else {
-                Text("サブ犬種なし")
+                Text("breed.no_sub_breeds")
                     .foregroundColor(.secondary)
             }
         }
@@ -67,7 +67,7 @@ struct BreedDetailView: View {
 
     private func failedView(_ error: Error) -> some View {
         VStack(spacing: 8) {
-            Text("画像の取得に失敗しました")
+            Text("breed_detail.load_failed")
                 .font(.headline)
             Text(error.localizedDescription)
                 .font(.footnote)

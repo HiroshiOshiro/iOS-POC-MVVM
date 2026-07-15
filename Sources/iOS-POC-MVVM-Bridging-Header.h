@@ -6,5 +6,6 @@
 #import "DogAPIService.h"
 #import "FavoritesStore.h"
 #import "ImageLoader.h"
+#import "ThirdScreen.h"
 
 #endif

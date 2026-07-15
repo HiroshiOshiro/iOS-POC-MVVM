@@ -35,6 +35,23 @@
         }
       }
     },
+    "breed_detail.go_to_third_screen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Third Screen"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画面3へ"
+          }
+        }
+      }
+    },
     "breed_detail.sub_breeds_format" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -388,6 +405,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "トークン: %@"
+          }
+        }
+      }
+    },
+    "third_screen.back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to Breed Detail"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬種詳細に戻る"
+          }
+        }
+      }
+    },
+    "third_screen.received_number_format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Received number: %ld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "受け取った番号: %ld"
+          }
+        }
+      }
+    },
+    "third_screen.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third Screen"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画面3"
           }
         }
       }

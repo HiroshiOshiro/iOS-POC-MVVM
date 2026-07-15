@@ -22,7 +22,8 @@ final class BreedDetailViewController: UIViewController {
             services: .init(
                 breedDetail: DefaultBreedDetailService(
                     imagesRepository: DogAPIBreedImagesRepository(),
-                    favoritesRepository: DefaultsFavoritesRepository()
+                    favoritesRepository: DefaultsFavoritesRepository(),
+                    thirdScreenNumberRepository: FakeThirdScreenNumberRepository()
                 )
             )
         )
@@ -47,6 +48,7 @@ final class BreedDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         embedHost()
         setupFavoriteButton()
+        setupThirdScreenButton()
     }
 
     private func embedHost() {
@@ -83,5 +85,71 @@ final class BreedDetailViewController: UIViewController {
 
     @objc private func favoriteTapped() {
         container.services.breedDetail.toggleFavorite(item)
+    }
+
+    // MARK: - ThirdScreen (ObjC) navigation
+
+    /// Swift -> ObjC への画面遷移サンプル。ThirdScreen はブリッジングヘッダー経由で見えている ObjC クラス。
+    private func setupThirdScreenButton() {
+        // leftBarButtonItem を設定すると標準の戻るボタン(-> BreedList)が上書きされて消えてしまうため、
+        // leftItemsSupplementBackButton = true で戻るボタンと併置する。
+        navigationItem.leftItemsSupplementBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: String(localized: "breed_detail.go_to_third_screen"),
+            style: .plain,
+            target: self,
+            action: #selector(goToThirdScreenTapped)
+        )
+    }
+
+    @objc private func goToThirdScreenTapped() {
+        // フェイク API 呼び出し中はローディング UI を出し、ボタンを無効化する。
+        setThirdScreenLoading(true)
+        Task { @MainActor in
+            defer { setThirdScreenLoading(false) }
+            do {
+                // 1 秒待ってランダムな番号を返すフェイク API。
+                let number = try await container.services.breedDetail.fetchThirdScreenNumber()
+                let thirdScreen = ThirdScreen(randomNumber: number)
+                navigationController?.pushViewController(thirdScreen, animated: true)
+            } catch {
+                // フェイク API は失敗しない想定。実 API 化した場合はここでエラー表示する。
+            }
+        }
+    }
+
+    // MARK: - Loading UI
+
+    /// 画面全体を覆う半透明のローディングオーバーレイ。
+    private lazy var loadingOverlay: UIView = {
+        let overlay = UIView()
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.25)
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.color = .white
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        overlay.addSubview(spinner)
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
+        ])
+        return overlay
+    }()
+
+    private func setThirdScreenLoading(_ isLoading: Bool) {
+        navigationItem.leftBarButtonItem?.isEnabled = !isLoading
+        if isLoading {
+            view.addSubview(loadingOverlay)
+            NSLayoutConstraint.activate([
+                loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
+                loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
+        } else {
+            loadingOverlay.removeFromSuperview()
+        }
     }
 }

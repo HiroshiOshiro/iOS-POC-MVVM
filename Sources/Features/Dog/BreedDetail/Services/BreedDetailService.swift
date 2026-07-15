@@ -9,16 +9,21 @@ protocol BreedDetailService: Sendable {
     @MainActor @discardableResult
     func toggleFavorite(_ breed: BreedItem) -> Bool
     func observeFavoritesChanges(_ handler: @escaping @Sendable () -> Void) -> ObservationToken
+    /// ThirdScreen へ渡す番号をフェイク API 経由で取得する（1 秒程度かかる）。
+    func fetchThirdScreenNumber() async throws -> Int
 }
 
 struct DefaultBreedDetailService: BreedDetailService {
     private let imagesRepository: BreedImagesRepository
     private let favoritesRepository: FavoritesRepository
+    private let thirdScreenNumberRepository: ThirdScreenNumberRepository
 
     init(imagesRepository: BreedImagesRepository,
-         favoritesRepository: FavoritesRepository) {
+         favoritesRepository: FavoritesRepository,
+         thirdScreenNumberRepository: ThirdScreenNumberRepository) {
         self.imagesRepository = imagesRepository
         self.favoritesRepository = favoritesRepository
+        self.thirdScreenNumberRepository = thirdScreenNumberRepository
     }
 
     @MainActor
@@ -48,5 +53,9 @@ struct DefaultBreedDetailService: BreedDetailService {
 
     func observeFavoritesChanges(_ handler: @escaping @Sendable () -> Void) -> ObservationToken {
         favoritesRepository.observeChanges(handler)
+    }
+
+    func fetchThirdScreenNumber() async throws -> Int {
+        try await thirdScreenNumberRepository.fetchNumber()
     }
 }
